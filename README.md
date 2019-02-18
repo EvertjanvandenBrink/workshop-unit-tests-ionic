@@ -1,5 +1,9 @@
 # Workshop Unit Testing in Ionic
 
+Presentatoren: 
+
+Deadline: Woensdag 20-02-19
+
 Thema: Product in winkelwagen
 
 Planning: 
