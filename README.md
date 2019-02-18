@@ -2,7 +2,18 @@
 
 Thema: Product in winkelwagen
 
-## Frameworks
+Planning: 
+
+- Rick: Maakt project rondom het thema 
+- Evert: Ppoint + uitleg
+- Wisse: Testing Structure 
+- Niels:  Component
+- Rick: Services
+- Evert: Mocking
+
+## Uitleg
+
+### Frameworks
 
 - Karma
 - Jasmine
