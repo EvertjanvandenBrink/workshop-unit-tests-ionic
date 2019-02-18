@@ -1,5 +1,11 @@
 # Workshop Unit Testing in Ionic
 
+| Presentatoren                                                | Header 2 |
+| ------------------------------------------------------------ | -------- |
+| Rick Goemans<br />Wisse van Balveren<br />Evertjan van den Brink<br />Niels van Leeuwen |          |
+
+
+
 Presentatoren: 
 
 Deadline: Woensdag 20-02-19
