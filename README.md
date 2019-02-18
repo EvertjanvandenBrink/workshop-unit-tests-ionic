@@ -1,8 +1,9 @@
 # Workshop Unit Testing in Ionic
 
-| Presentatoren                                                | Header 2 |
-| ------------------------------------------------------------ | -------- |
-| Rick Goemans<br />Wisse van Balveren<br />Evertjan van den Brink<br />Niels van Leeuwen |          |
+| Presentatoren                                                |
+| ------------------------------------------------------------ |
+| Rick Goemans<br />Wisse van Balveren<br />Evertjan van den Brink<br />Niels van Leeuwen |
+|                                                              |
 
 
 
