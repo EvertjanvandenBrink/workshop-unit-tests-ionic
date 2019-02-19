@@ -25,6 +25,8 @@ Planning:
 
 Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt toegevoegd aan een wishlist. Om de werking goed te testen, dienen er unit tests geschreven te worden. Dit wordt in deze worskhop uitgelegd. 
 
+![image-20190219114208926](/Users/Niels/Documents/1. HAN/4 Minor/DHA/Workshops/dha-vj-2019-vt-workshop-unit-tests-ionic/image-20190219114208926.png)
+
 ### Frameworks
 
 - Karma
