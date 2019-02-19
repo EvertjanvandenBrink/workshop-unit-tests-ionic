@@ -1,0 +1,31 @@
+<h1>
+    <ion-icon name="list"></ion-icon>
+    Producten
+</h1>
+<ion-list inset *ngIf="products && products.length">
+    <ion-item-sliding *ngFor="let product of products">
+        <ion-item>
+            <ion-avatar>
+                <img [src]="product.image">
+            </ion-avatar>
+            <ion-label text-wrap>
+                <!-- Product info -->
+                <ion-text color="primary">
+                    <h1>{{ product.name }}</h1>
+                </ion-text>
+                <p>
+                    € {{ product.price }}
+                </p>
+                <!-- /Product info -->
+            </ion-label>
+        </ion-item>
+
+        <!-- Actions -->
+        <ion-item-options side="end">
+            <ion-item-option color="primary" (click)="addProductToWishlist(product)">
+                <ion-icon name="add" size="large"></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+        <!-- /Actions -->
+    </ion-item-sliding>
+</ion-list>
