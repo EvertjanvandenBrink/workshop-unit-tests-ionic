@@ -1,17 +1,16 @@
 # Workshop Unit Testing in Ionic
 
-| Presentatoren                                                |
+| **Thema**                                                    |
 | ------------------------------------------------------------ |
-| Rick Goemans<br />Wisse van Balveren<br />Evertjan van den Brink<br />Niels van Leeuwen |
-|                                                              |
+| Product in winkelwagen (Unit Tests)                          |
+| **Contributors:**                                            |
+| Rick Goemans, Wisse van Balveren, Evertjan van den Brink, Niels van Leeuwen |
+| **Datum**                                                    |
+| 22-02-2019                                                   |
 
 
-
-Presentatoren: 
 
 Deadline: Woensdag 20-02-19
-
-Thema: Product in winkelwagen
 
 Planning: 
 
@@ -24,6 +23,10 @@ Planning:
 
 ## Uitleg
 
+Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt toegevoegd aan een wishlist. Om de werking goed te testen, dienen er unit tests geschreven te worden. Dit wordt in deze worskhop uitgelegd. 
+
+![image-20190219114208926](/Users/Niels/Documents/1. HAN/4 Minor/DHA/Workshops/dha-vj-2019-vt-workshop-unit-tests-ionic/image-20190219114208926.png)
+
 ### Frameworks
 
 - Karma
@@ -32,6 +35,11 @@ Planning:
 ## Setup 
 
 *Project opzetten.*
+
+```
+npm install 
+ionic serve 
+```
 
 ## Testing Structure
 
