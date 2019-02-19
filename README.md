@@ -25,7 +25,7 @@ Planning:
 
 Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt toegevoegd aan een wishlist. Om de werking goed te testen, dienen er unit tests geschreven te worden. Dit wordt in deze worskhop uitgelegd. 
 
-![image-20190219114208926](../image-20190219114208926.png)
+![image-20190219114208926](../../image-20190219114208926.png)
 
 ### Frameworks
 
