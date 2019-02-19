@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../service/products.service';
 import { ReplaySubject } from 'rxjs';
+
+import { Product } from '../../classes/product';
+import { ProductsService } from '../../service/products.service';
 
 @Component({
     selector: 'app-wishlist',
