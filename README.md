@@ -168,7 +168,47 @@ expect(wishlistElement.textContent).toContain('Wishlist');
 
 ## Services
 
-...
+Services zijn bedoeld om data centraal te stellen zodat dat gebruikt en gesynchroniseerd kan worden tussen verschillende componenten. 
+
+Wat er dan getest kan worden is of een return waarde van een call op een service overeenkomt met wat je verwacht. Dit kan een `directe waarde` zijn of een waarde die uit een `Promise` of `Observable` komt(asynchronous).
+
+In ons voorbeeld gebruiken wij een `ReplaySubject` (voor zowel de producten als wishlist) wat eigenlijk een extensie is van Obserables doordat je ook nog een buffer kan bijhouden van hoevaak hij terug moet zoeken bij de initialisatie.
+Stel voor dat je wel al producten aan je wishlist toevoegt maar pas later op de ReplaySubject subscribed dan krijg je het aantal keer dat er waardes doorgegeven is terug die je opgeeft als buffer.
+
+Aangezien wij producten laden uit onze mock data kunnen wij testen of de getProducts ReplaySubject dit ook terug geeft.
+Het andere wat wij kunnen testen is of aan het begin van de applicatie onze wishlist ook nog niks bevat.
+
+Hier een voorbeeld: 
+
+```typescript
+import { ProductsService } from './products.service';
+import { Product } from '../classes/product';
+import { products } from '../mock-data/products';
+
+describe('ProductsService', () => {
+    let service: ProductsService;
+
+    beforeEach(() => {
+        service = new ProductsService();
+    });
+
+    it('#getProducts should return products from observable', (done: DoneFn) => {
+        service.getProducts().subscribe((retrievedProducts: Array<Product>) => {
+            expect(retrievedProducts).toEqual(products);
+            done();
+        });
+    });
+    
+    it('#getWishlist should return wishlist from observable', (done: DoneFn) => {
+        service.getWishlist().subscribe((wishlist: Array<Product>) => {
+            expect(wishlist).toEqual([]);
+            done();
+        });
+    });
+});
+```
+
+Zoals je ziet moet je een DoneFn functie meegeven als argument voor de test zodat Jasmine weet dat het om een asynchronous test gaat.
 
 ## Mocking
 
