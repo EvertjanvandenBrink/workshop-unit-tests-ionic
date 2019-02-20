@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsComponent } from './products.component';
+import {Product} from '../../classes/product';
 
 describe('ProductsComponent', () => {
     let component: ProductsComponent;
@@ -24,4 +25,5 @@ describe('ProductsComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
 });
