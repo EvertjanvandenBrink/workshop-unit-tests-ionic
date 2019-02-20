@@ -69,7 +69,6 @@ Vervolgens voeg je de ```karma-safari-launcher``` toe in de plugins array.
 ```javascript
 plugins: [
       require('karma-jasmine'),
-      require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma'),
