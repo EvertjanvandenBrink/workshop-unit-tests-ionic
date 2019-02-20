@@ -49,7 +49,7 @@ ionic serve
 
 Pages in het Ionic framework zijn Angular components. Daarom worden de pagina's volgens de [Angular's Component Testing](https://angular.io/guide/testing#component-test-basics) guidelines gemaakt en getest. Sind pagina's en componenten TypeScript en HTML code gebruiken, is het mogelijk om class testing en component DOM testing uit te voeren.
 
-### Class testing
+### Component class testing
 
 Als een pagina gemaakt is, wordt er een templaate test gegenereerd wat er zo uit ziet: 
 
@@ -57,7 +57,7 @@ Als een pagina gemaakt is, wordt er een templaate test gegenereerd wat er zo uit
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; import { async, ComponentFixture, TestBed } from '@angular/core/testing';  import { TabsPage } from './tabs.page';  describe('TabsPage', () => {   let component: TabsPage;   let fixture: ComponentFixture<TabsPage>;    beforeEach(async () => {     TestBed.configureTestingModule({       declarations: [TabsPage],       schemas: [CUSTOM_ELEMENTS_SCHEMA],     }).compileComponents();   });    beforeEach(() => {     fixture = TestBed.createComponent(TabsPage);     component = fixture.componentInstance;     fixture.detectChanges();   });    it('should create', () => {     expect(component).toBeTruthy();   }); });
 ```
 
-In deze template test voegen we een test toe voor het maken van component test. Hier wordt er getest of een product verwijderd kan worden van de wishlist. 
+In deze template file `wishlist.component.spec.ts` voegen we een test toe voor het maken van component test. Hier wordt er getest of een product verwijderd kan worden van de wishlist. 
 
 ```typescript
 it('should remove product from wishlist', () => {
@@ -81,6 +81,29 @@ Het belangrijkste gedeelte is de test of het product daadwerkelijk verwijdert is
 
 ```typescript
 expect(component.wishlist.length).toBe(0);
+```
+
+### Component DOM testing
+
+Wanneer we component class testing uitvoeren maken we gebruik van de `component = fixture.componentInstance;`. Dit is een instance van het component class. In tegenstelling tot class testing, maken we bij DOM testing gebruik van de property `fixture.nativeElement`. Dit is een `HTMLElement` van het component. Dit maakt het mogelijk om volgens via de standaard HTML API methodes te testen, omdat er via het `HTMLElement` bijvoorbeeld een `querySelector` gebruikt kan worden.
+
+In de template file `wishlist-external.component.spec.ts` voegen we een test toe voor het maken van een DOM test. Hier wordt getest of het `HTMLElement` title daadwerkelijk de text "Wishlist" bevat. 
+
+```typescript
+it('should contain title "Wishlist"', () => {
+    // Here comes your first DOM test.
+});
+```
+
+In de functie hierboven voegen we de volgende regel toe om het html element aan te spreken. 
+
+```typescript
+const wishlistElement: HTMLElement = fixture.nativeElement;
+```
+Nadat het `HTMLElement`in de variabele `wishlistElement` zit, kunnen we testen of de tekst overeenkomt met de verwachte tekst door de volgende regel toe te voegen. 
+
+```
+expect(wishlistElement.textContent).toContain('Wishlist');
 ```
 
 ## Services
