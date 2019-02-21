@@ -29,8 +29,8 @@ Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt 
 
 ### Frameworks
 
-- Karma
-- Jasmine
+- Karma: de test runner
+- Jasmine: het test framework
 
 ## Setup 
 
@@ -41,9 +41,71 @@ npm install
 ionic serve 
 ```
 
+*Tests uitvoeren.*
+
+```
+npm test
+```
+
 ## Testing Structure
 
-*Hoe een test is opgezet.*
+Unit tests bevinden zich in de ```.spec``` files. Elk component/service heeft één ```.spec``` file.
+Deze ```.spec``` files worden standaard gegenereerd wanneer je via de CLI een Angular component of service aanmaakt.
+
+
+De ```.spec``` files bevatten een enkele ```describe``` aanroep die aangeeft waar de test over gaat.
+Binnen deze ```describe``` kan je vervolgens andere ```describe``` aanroepen uitvoeren die over grote delen functionaliteit gaan.
+In de ```describe``` kan je een ```it``` aanroepen. ```it``` wordt gebruikt voor het definiëren van individuele unit tests. 
+Binnen elke ```describe``` kun je setup en teardown code aanroepen(Bijvoorbeeld ```beforeEach()``` of ```afterEach()```).
+
+In de ```describe``` en ```it``` functies kan je ook een label toevoegen. In goed opgestelde tests vormen deze labels een zin voor elke testcase.
+Dit kan er als volgt uitzien:
+
+```
+describe('Calculation', () => {
+  describe('divide', () => {
+    it('calculates 4 / 2 properly' () => {});
+    it('cowardly refuses to divide by zero' () => {});
+    ...
+  });
+
+  describe('multiply', () => {
+    ...
+  });
+});
+```
+
+Karma maakt gebruik van een browser om de tests in uit te voeren. Standaard is dit Chrome. Dit kan je veranderen als je geen Chrome hebt, of als je graag je favoriete browser wil gebruiken. 
+Dit vereist enige setup. In dit voorbeeld wordt Safari toegevoegd, dit gaat als volgt: 
+
+Installeer de ```karma-safari-launcher``` als devDependency
+
+```
+npm install karma-safari-launcher --save-dev
+```
+
+Vervolgens pas je de karma configuratie aan. Open ```karma.conf.js```  en voeg Safari toe in de array van browsers.
+
+```javascript
+browsers: ['Safari'],
+```
+
+Vervolgens voeg je de ```karma-safari-launcher``` toe in de plugins array.
+
+```javascript
+plugins: [
+      require('karma-jasmine'),
+      require('karma-jasmine-html-reporter'),
+      require('karma-coverage-istanbul-reporter'),
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('karma-safari-launcher')
+    ],
+```
+
+Als je benieuwd bent of je favoriete browser ook ondersteund is, kijk dan op de [site](http://karma-runner.github.io/3.0/config/browsers.html) van Karma. Daar staan alle ondersteunde browsers weergegeven. 
+
+
+
 
 ## Components
 
@@ -108,7 +170,47 @@ expect(wishlistElement.textContent).toContain('Wishlist');
 
 ## Services
 
-...
+Services zijn bedoeld om data centraal te stellen zodat dat gebruikt en gesynchroniseerd kan worden tussen verschillende componenten. 
+
+Wat er dan getest kan worden is of een return waarde van een call op een service overeenkomt met wat je verwacht. Dit kan een `directe waarde` zijn of een waarde die uit een `Promise` of `Observable` komt(asynchronous).
+
+In ons voorbeeld gebruiken wij een `ReplaySubject` (voor zowel de producten als wishlist) wat eigenlijk een extensie is van Obserables doordat je ook nog een buffer kan bijhouden van hoevaak hij terug moet zoeken bij de initialisatie.
+Stel voor dat je wel al producten aan je wishlist toevoegt maar pas later op de ReplaySubject subscribed dan krijg je het aantal keer dat er waardes doorgegeven is terug die je opgeeft als buffer.
+
+Aangezien wij producten laden uit onze mock data kunnen wij testen of de getProducts ReplaySubject dit ook terug geeft.
+Het andere wat wij kunnen testen is of aan het begin van de applicatie onze wishlist ook nog niks bevat.
+
+Hier een voorbeeld: 
+
+```typescript
+import { ProductsService } from './products.service';
+import { Product } from '../classes/product';
+import { products } from '../mock-data/products';
+
+describe('ProductsService', () => {
+    let service: ProductsService;
+
+    beforeEach(() => {
+        service = new ProductsService();
+    });
+
+    it('#getProducts should return products from observable', (done: DoneFn) => {
+        service.getProducts().subscribe((retrievedProducts: Array<Product>) => {
+            expect(retrievedProducts).toEqual(products);
+            done();
+        });
+    });
+    
+    it('#getWishlist should return wishlist from observable', (done: DoneFn) => {
+        service.getWishlist().subscribe((wishlist: Array<Product>) => {
+            expect(wishlist).toEqual([]);
+            done();
+        });
+    });
+});
+```
+
+Zoals je ziet moet je een DoneFn functie meegeven als argument voor de test zodat Jasmine weet dat het om een asynchronous test gaat.
 
 ## Mocking
 
