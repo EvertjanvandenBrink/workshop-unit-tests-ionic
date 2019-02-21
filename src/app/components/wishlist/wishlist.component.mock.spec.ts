@@ -20,11 +20,6 @@ describe('WishlistComponent', () => {
     });
 
     it('should remove product from wishlist with spy', () => {
-        const product = new Product();
-
-        spyOn(service, 'removeFromWishlist');
-        component.removeProductFromWishlist(product);
-
-        expect(service.removeFromWishlist).toHaveBeenCalledTimes(1);
+        // Here comes your first component mock test
     });
 });

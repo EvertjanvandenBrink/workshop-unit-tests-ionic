@@ -113,7 +113,7 @@ Pages in het Ionic framework zijn Angular components. Daarom worden de pagina's 
 
 ### Component class testing
 
-Als een pagina gemaakt is, wordt er een templaate test gegenereerd wat er zo uit ziet: 
+Als een pagina gemaakt is, wordt er een template test gegenereerd wat er zo uit ziet: 
 
 ```typescript
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; import { async, ComponentFixture, TestBed } from '@angular/core/testing';  import { TabsPage } from './tabs.page';  describe('TabsPage', () => {   let component: TabsPage;   let fixture: ComponentFixture<TabsPage>;    beforeEach(async () => {     TestBed.configureTestingModule({       declarations: [TabsPage],       schemas: [CUSTOM_ELEMENTS_SCHEMA],     }).compileComponents();   });    beforeEach(() => {     fixture = TestBed.createComponent(TabsPage);     component = fixture.componentInstance;     fixture.detectChanges();   });    it('should create', () => {     expect(component).toBeTruthy();   }); });
@@ -214,11 +214,54 @@ Zoals je ziet moet je een DoneFn functie meegeven als argument voor de test zoda
 
 ## Mocking
 
-...
+In Jasmine worden mocks spies genoemd. Er zijn 2 manieren om een spy te maken: 
+- spyOn() 
+- createSpy
 
+spyOn kan enkel gebruikt worden als de methode al in de te mocken classe bestaat terwijl createSpy() een geheel nieuwe functie zal opleveren. 
+In deze demo maken we enkel gebruik van spyOn. 
 
+### spyOn in dezelfde classe 
 
+Als eerste gaan we spyOn gebruien door een methode uit dezelfde classe te mocken. Hiervoor gaan we naar het bestand Product.spec.ts. 
+In dit bestand gaan we een testproduct aanmaken.
 
+```typescript
+let testProduct;
+```
 
+Vervolgens gaan we dit testProduct vullen in de beforeTest methode.
 
+```typescript
+testProduct = new Product();
+```
 
+Ook maken we het testproduct weer leeg in de afterTest methode.
+
+```typescript
+testProduct = undefined;
+```
+
+Vervolgens gaan we in de testfunctie aangeven voor welke methode we willen weten of hij wordt aangeroepen. 
+Daaropvolgend gaan we de toString methode aanroepen. En als laatste testen we of de bespioneerde methode ook daadwerkelijk aangeroepen is in de toString functie.
+
+```typescript
+spyOn(testProduct, 'getName');
+testProduct.toString();
+expect(testProduct.getName).toHaveBeenCalledTimes(1);
+```
+. 
+
+### spyOn in een andere classe
+
+Nu we weten hoe we spyOn in dezelfde classe moeten gebruiken gaan we spyOn in een andere classe dan de te testen classe gebruiken. Hiervoor gaan wenaar de wishlist.component.mock.spec.ts
+In deze methode gaan we testen of de removeFromWishlist uit de service classe ook wordt aangeroepen als we de removeProductFromWishlist uit de wishlistcomponent aanroepen.
+
+```typescript
+const product = new Product();
+
+spyOn(service, 'removeFromWishlist');
+component.removeProductFromWishlist(product);
+
+expect(service.removeFromWishlist).toHaveBeenCalledTimes(1);
+```
