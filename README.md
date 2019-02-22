@@ -9,18 +9,6 @@
 | 22-02-2019                                                   |
 
 
-
-Deadline: Woensdag 20-02-19
-
-Planning: 
-
-- Rick: Maakt project rondom het thema 
-- Evert: Ppoint + uitleg
-- Wisse: Testing Structure 
-- Niels:  Component
-- Rick: Services
-- Evert: Mocking
-
 ## Uitleg
 
 Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt toegevoegd aan een wishlist. Om de werking goed te testen, dienen er unit tests geschreven te worden. Dit wordt in deze worskhop uitgelegd. 
