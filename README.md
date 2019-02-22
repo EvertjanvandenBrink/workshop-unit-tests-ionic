@@ -9,7 +9,6 @@
 | 22-02-2019                                                   |
 
 
-
 Deadline: Woensdag 20-02-19
 
 Planning: 
@@ -22,13 +21,11 @@ Planning:
 - Evert: Mocking
 
 ## Uitleg
-
 Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt toegevoegd aan een wishlist. Om de werking goed te testen, dienen er unit tests geschreven te worden. Dit wordt in deze worskhop uitgelegd. 
 
 ![image-20190219114208926](https://github.com/HANICA-MAD/dha-vj-2019-vt-workshop-unit-tests-ionic/blob/master/image-20190219114208926.png)
 
 ### Frameworks
-
 - Karma: de test runner
 - Jasmine: het test framework
 
@@ -36,7 +33,7 @@ Dit project simuleert een gedeelte van een webwinkel, waarbij een product wordt 
 
 *Project opzetten.*
 
-```
+```console
 npm install 
 ionic serve 
 ```
@@ -52,19 +49,19 @@ npm test
 Karma maakt gebruik van een browser om de tests in uit te voeren. Standaard is dit Chrome. Dit kan je veranderen als je geen Chrome hebt, of als je graag je favoriete browser wil gebruiken. 
 Dit vereist enige setup. In dit voorbeeld wordt Safari toegevoegd, dit gaat als volgt: 
 
-Installeer de ```karma-safari-launcher``` als devDependency
+Installeer de `karma-safari-launcher` als devDependency
 
 ```
 npm install karma-safari-launcher --save-dev
 ```
 
-Vervolgens pas je de karma configuratie aan. Open ```karma.conf.js```  en voeg Safari toe in de array van browsers.
+Vervolgens pas je de karma configuratie aan. Open `karma.conf.js`  en voeg Safari toe in de array van browsers.
 
 ```javascript
 browsers: ['Safari'],
 ```
 
-Vervolgens voeg je de ```karma-safari-launcher``` toe in de plugins array.
+Vervolgens voeg je de `karma-safari-launcher` toe in de plugins array.
 
 ```javascript
 plugins: [
@@ -78,16 +75,16 @@ plugins: [
 
 Als je benieuwd bent of je favoriete browser ook ondersteund is, kijk dan op de [site](http://karma-runner.github.io/3.0/config/browsers.html) van Karma. Daar staan alle ondersteunde browsers weergegeven. 
 
-Unit tests bevinden zich in de ```.spec``` files. Elk component/service heeft één ```.spec``` file.
-Deze ```.spec``` files worden standaard gegenereerd wanneer je via de CLI een Angular component of service aanmaakt.
+Unit tests bevinden zich in de `.spec` files. Elk component/service heeft één `.spec` file.
+Deze `.spec` files worden standaard gegenereerd wanneer je via de CLI een Angular component of service aanmaakt.
 
 
-De ```.spec``` files bevatten een enkele ```describe``` aanroep die aangeeft waar de test over gaat.
-Binnen deze ```describe``` kan je vervolgens andere ```describe``` aanroepen uitvoeren die over grote delen functionaliteit gaan.
-In de ```describe``` kan je een ```it``` aanroepen. ```it``` wordt gebruikt voor het definiëren van individuele unit tests. 
-Binnen elke ```describe``` kun je setup en teardown code aanroepen(Bijvoorbeeld ```beforeEach()``` of ```afterEach()```).
+De `.spec` files bevatten een enkele `describe` aanroep die aangeeft waar de test over gaat.
+Binnen deze `describe` kan je vervolgens andere `describe` aanroepen uitvoeren die over grote delen functionaliteit gaan.
+In de `describe` kan je een `it` aanroepen. `it` wordt gebruikt voor het definiëren van individuele unit tests. 
+Binnen elke `describe` kun je setup en teardown code aanroepen(Bijvoorbeeld `beforeEach()` of `afterEach()`).
 
-In de ```describe``` en ```it``` functies kan je ook een label toevoegen. In goed opgestelde tests vormen deze labels een zin voor elke testcase.
+In de `describe` en `it` functies kan je ook een label toevoegen. In goed opgestelde tests vormen deze labels een zin voor elke testcase.
 Dit kan er als volgt uitzien:
 
 ```
@@ -107,11 +104,11 @@ describe('Calculation', () => {
 
 ## Components
 
-Pages in het Ionic framework zijn Angular components. Daarom worden de pagina's volgens de [Angular's Component Testing](https://angular.io/guide/testing#component-test-basics) guidelines gemaakt en getest. Sind pagina's en componenten TypeScript en HTML code gebruiken, is het mogelijk om class testing en component DOM testing uit te voeren.
+Pages in het Ionic framework zijn Angular components. Daarom worden de pagina's volgens de [Angular's Component Testing](https://angular.io/guide/testing#component-test-basics) guidelines gemaakt en getest. Omdat pagina's en componenten TypeScript en HTML code gebruiken, is het mogelijk om class testing en component DOM testing uit te voeren.
 
 ### Component class testing
 
-Als een pagina gemaakt is, wordt er een templaate test gegenereerd wat er zo uit ziet: 
+Als een pagina gemaakt is, wordt er een template test gegenereerd wat er zo uit ziet: 
 
 ```typescript
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; import { async, ComponentFixture, TestBed } from '@angular/core/testing';  import { TabsPage } from './tabs.page';  describe('TabsPage', () => {   let component: TabsPage;   let fixture: ComponentFixture<TabsPage>;    beforeEach(async () => {     TestBed.configureTestingModule({       declarations: [TabsPage],       schemas: [CUSTOM_ELEMENTS_SCHEMA],     }).compileComponents();   });    beforeEach(() => {     fixture = TestBed.createComponent(TabsPage);     component = fixture.componentInstance;     fixture.detectChanges();   });    it('should create', () => {     expect(component).toBeTruthy();   }); });
@@ -173,9 +170,9 @@ Services zijn bedoeld om data centraal te stellen zodat dat gebruikt en gesynchr
 Wat er dan getest kan worden is of een return waarde van een call op een service overeenkomt met wat je verwacht. Dit kan een `directe waarde` zijn of een waarde die uit een `Promise` of `Observable` komt(asynchronous).
 
 In ons voorbeeld gebruiken wij een `ReplaySubject` (voor zowel de producten als wishlist) wat eigenlijk een extensie is van Obserables doordat je ook nog een buffer kan bijhouden van hoevaak hij terug moet zoeken bij de initialisatie.
-Stel voor dat je wel al producten aan je wishlist toevoegt maar pas later op de ReplaySubject subscribed dan krijg je het aantal keer dat er waardes doorgegeven is terug die je opgeeft als buffer.
+Stel voor dat je wel al producten aan je wishlist toevoegt maar pas later op de `ReplaySubject` subscribed dan krijg je het aantal keer dat er waardes doorgegeven is terug die je opgeeft als buffer.
 
-Aangezien wij producten laden uit onze mock data kunnen wij testen of de getProducts ReplaySubject dit ook terug geeft.
+Aangezien wij producten laden uit onze mock data kunnen wij testen of de `getProducts` `ReplaySubject` dit ook terug geeft.
 Het andere wat wij kunnen testen is of aan het begin van de applicatie onze wishlist ook nog niks bevat.
 
 Hier een voorbeeld: 
@@ -208,7 +205,7 @@ describe('ProductsService', () => {
 });
 ```
 
-Zoals je ziet moet je een DoneFn functie meegeven als argument voor de test zodat Jasmine weet dat het om een asynchronous test gaat.
+Zoals je ziet moet je een `DoneFn` functie meegeven als argument voor de test zodat Jasmine weet dat het om een asynchronous test gaat.
 
 ## Mocking
 
