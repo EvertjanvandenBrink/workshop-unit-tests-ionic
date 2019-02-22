@@ -1,4 +1,6 @@
-export const products = [
+import { Product } from '../classes/product';
+
+export const products: Array<Product> = [
     {
         id: 1,
         name: 'Stoel',
